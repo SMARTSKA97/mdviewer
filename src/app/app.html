@@ -1,0 +1,122 @@
+<div class="flex flex-col h-screen w-screen overflow-hidden font-sans" style="background-color: var(--bg-primary); color: var(--text-primary);">
+  <!-- Top Navigation Header -->
+  @if (!store.isZenMode()) {
+    <app-header></app-header>
+  }
+
+  <!-- Main Application Body -->
+  <div class="flex-1 flex overflow-hidden relative">
+    <!-- Collapsible Sidebar (TOC / Docs / Snippets) -->
+    @if (!store.isZenMode()) {
+      <app-sidebar></app-sidebar>
+    }
+
+    <!-- Center Workspace Pane (Split / Editor / Preview / Database Table / Kanban) -->
+    <main class="flex-1 flex flex-col overflow-hidden relative" style="background-color: var(--bg-primary);">
+      @if (dbService.mainViewMode() === 'document') {
+        <!-- Split View Mode -->
+        @if (store.viewMode() === 'split') {
+          <div class="flex-1 flex overflow-hidden">
+            <!-- Left: Editor with Toolbar -->
+            <div 
+              class="flex flex-col h-full overflow-hidden" 
+              [style.width.%]="splitterRatio()"
+            >
+              @if (!store.isZenMode()) {
+                <app-toolbar 
+                  (format)="onToolbarFormat($event)" 
+                  (action)="onToolbarAction($event)"
+                ></app-toolbar>
+              }
+              <div class="flex-1 overflow-hidden">
+                <app-editor (editorScrolled)="onEditorScrolled($event)"></app-editor>
+              </div>
+            </div>
+
+            <!-- Resizable Splitter Handle -->
+            <div 
+              (mousedown)="startSplitterDrag($event)"
+              [class.bg-sky-500]="isDraggingSplitter()"
+              class="w-1.5 hover:w-2 cursor-col-resize transition-colors select-none z-10 shrink-0 relative group"
+              style="background-color: var(--border-color);"
+              title="Drag to resize panels"
+            >
+              <div class="absolute inset-y-0 -left-1 -right-1 cursor-col-resize"></div>
+            </div>
+
+            <!-- Right: Live Preview Pane -->
+            <div 
+              class="flex-1 h-full overflow-hidden border-l"
+              style="border-color: var(--border-color); background-color: var(--bg-primary);"
+            >
+              <app-preview (previewScrolled)="onPreviewScrolled($event)"></app-preview>
+            </div>
+          </div>
+        }
+
+        <!-- Editor Only Mode -->
+        @if (store.viewMode() === 'editor') {
+          <div class="flex-1 flex flex-col overflow-hidden">
+            @if (!store.isZenMode()) {
+              <app-toolbar 
+                (format)="onToolbarFormat($event)" 
+                (action)="onToolbarAction($event)"
+              ></app-toolbar>
+            }
+            <div class="flex-1 overflow-hidden max-w-4xl w-full mx-auto">
+              <app-editor></app-editor>
+            </div>
+          </div>
+        }
+
+        <!-- Preview Only Mode -->
+        @if (store.viewMode() === 'preview') {
+          <div class="flex-1 h-full overflow-hidden">
+            <app-preview></app-preview>
+          </div>
+        }
+      }
+
+      <!-- Database Table View -->
+      @if (dbService.mainViewMode() === 'table') {
+        <div class="flex-1 h-full overflow-hidden">
+          <app-database-table></app-database-table>
+        </div>
+      }
+
+      <!-- Kanban Board View -->
+      @if (dbService.mainViewMode() === 'kanban') {
+        <div class="flex-1 h-full overflow-hidden">
+          <app-kanban-board></app-kanban-board>
+        </div>
+      }
+    </main>
+
+    <!-- Floating Zen Mode Exit Button -->
+    @if (store.isZenMode()) {
+      <button 
+        (click)="store.toggleZenMode()"
+        class="fixed top-4 right-4 z-50 p-2 rounded-xl bg-slate-900/90 text-slate-400 hover:text-white border border-slate-800 shadow-xl opacity-40 hover:opacity-100 transition-all flex items-center gap-1.5 text-xs font-mono"
+        title="Exit Zen Mode (Ctrl+Shift+Z)"
+      >
+        <span>Exit Zen</span>
+        <span class="kbd-shortcut">ESC</span>
+      </button>
+    }
+  </div>
+
+  <!-- Bottom Status Bar -->
+  @if (!store.isZenMode()) {
+    <app-status-bar></app-status-bar>
+  }
+
+  <!-- Modals & Overlays -->
+  <app-command-palette></app-command-palette>
+  <app-export-modal></app-export-modal>
+  <app-cheatsheet-modal></app-cheatsheet-modal>
+  <app-presentation></app-presentation>
+  <app-diagram-modal></app-diagram-modal>
+  <app-global-search-modal></app-global-search-modal>
+  <app-graph-view></app-graph-view>
+  <app-vault-modal></app-vault-modal>
+</div>

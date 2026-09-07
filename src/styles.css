@@ -1,0 +1,979 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Default Dark Obsidian Theme */
+    --bg-primary: #090d16;
+    --bg-secondary: #0f172a;
+    --bg-tertiary: #1e293b;
+    --bg-surface: rgba(15, 23, 42, 0.75);
+    --bg-glass: rgba(15, 23, 42, 0.85);
+    --border-color: #334155;
+    --border-subtle: rgba(51, 65, 85, 0.6);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.25);
+    --accent-hover: #0ea5e9;
+    --selection-bg: rgba(56, 189, 248, 0.3);
+  }
+
+  [data-theme="github-light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #eaeef2;
+    --bg-surface: rgba(246, 248, 250, 0.9);
+    --bg-glass: rgba(255, 255, 255, 0.9);
+    --border-color: #d0d7de;
+    --border-subtle: rgba(208, 215, 222, 0.7);
+    --text-primary: #1f2328;
+    --text-secondary: #656d76;
+    --text-muted: #8c959f;
+    --accent: #0969da;
+    --accent-glow: rgba(9, 105, 218, 0.15);
+    --accent-hover: #0860ca;
+    --selection-bg: rgba(9, 105, 218, 0.2);
+  }
+
+  [data-theme="dracula"] {
+    --bg-primary: #21222c;
+    --bg-secondary: #282a36;
+    --bg-tertiary: #343746;
+    --bg-surface: rgba(40, 42, 54, 0.85);
+    --bg-glass: rgba(40, 42, 54, 0.92);
+    --border-color: #44475a;
+    --border-subtle: rgba(68, 71, 90, 0.6);
+    --text-primary: #f8f8f2;
+    --text-secondary: #bd93f9;
+    --text-muted: #6272a4;
+    --accent: #ff79c6;
+    --accent-glow: rgba(255, 121, 198, 0.25);
+    --accent-hover: #ff92d0;
+    --selection-bg: rgba(189, 147, 249, 0.3);
+  }
+
+  [data-theme="nord"] {
+    --bg-primary: #242933;
+    --bg-secondary: #2e3440;
+    --bg-tertiary: #3b4252;
+    --bg-surface: rgba(46, 52, 64, 0.85);
+    --bg-glass: rgba(46, 52, 64, 0.92);
+    --border-color: #434c5e;
+    --border-subtle: rgba(67, 76, 94, 0.6);
+    --text-primary: #eceff4;
+    --text-secondary: #d8dee9;
+    --text-muted: #7e8b9b;
+    --accent: #88c0d0;
+    --accent-glow: rgba(136, 192, 208, 0.25);
+    --accent-hover: #81a1c1;
+    --selection-bg: rgba(136, 192, 208, 0.3);
+  }
+
+  [data-theme="emerald"] {
+    --bg-primary: #061510;
+    --bg-secondary: #0b221a;
+    --bg-tertiary: #133a2d;
+    --bg-surface: rgba(11, 34, 26, 0.85);
+    --bg-glass: rgba(11, 34, 26, 0.92);
+    --border-color: #1b4f3e;
+    --border-subtle: rgba(27, 79, 62, 0.6);
+    --text-primary: #ecfdf5;
+    --text-secondary: #6ee7b7;
+    --text-muted: #34d399;
+    --accent: #10b981;
+    --accent-glow: rgba(16, 185, 129, 0.3);
+    --accent-hover: #059669;
+    --selection-bg: rgba(16, 185, 129, 0.3);
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+code, pre, kbd, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--selection-bg);
+  color: inherit;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--border-subtle);
+}
+
+.glass-nav {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border-subtle);
+}
+
+/* Light Theme Component Overrides */
+[data-theme="github-light"] .app-preview,
+[data-theme="github-light"] .app-editor,
+[data-theme="github-light"] .editor-textarea,
+[data-theme="github-light"] .editor-container {
+  background-color: #ffffff !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .app-editor textarea,
+[data-theme="github-light"] textarea {
+  color: #1f2328 !important;
+  background-color: #ffffff !important;
+  caret-color: #0969da !important;
+}
+
+[data-theme="github-light"] .app-sidebar {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .app-sidebar span,
+[data-theme="github-light"] .app-sidebar p,
+[data-theme="github-light"] .app-sidebar div {
+  color: #1f2328;
+}
+
+[data-theme="github-light"] .app-sidebar .bg-slate-900\/90,
+[data-theme="github-light"] .app-sidebar .bg-slate-950\/80,
+[data-theme="github-light"] .app-sidebar .bg-slate-900 {
+  background-color: #eaeef2 !important;
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] .app-sidebar button.bg-slate-800 {
+  background-color: #ffffff !important;
+  color: #0969da !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="github-light"] .app-sidebar a {
+  color: #334155 !important;
+}
+
+[data-theme="github-light"] .app-sidebar a:hover {
+  background-color: #eaeef2 !important;
+  color: #0969da !important;
+}
+
+[data-theme="github-light"] header {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] header .bg-clip-text {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] header button,
+[data-theme="github-light"] header span,
+[data-theme="github-light"] header div {
+  color: #1f2328;
+}
+
+[data-theme="github-light"] header .text-slate-400 {
+  color: #656d76 !important;
+}
+
+[data-theme="github-light"] header .bg-slate-900\/90,
+[data-theme="github-light"] header .bg-slate-900,
+[data-theme="github-light"] header .bg-slate-900\/40 {
+  background-color: #eaeef2 !important;
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] header .bg-slate-800 {
+  background-color: #ffffff !important;
+  color: #0969da !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="github-light"] .app-toolbar {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] .app-toolbar button {
+  color: #57606a !important;
+}
+
+[data-theme="github-light"] .app-toolbar button:hover {
+  background-color: #eaeef2 !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .status-bar,
+[data-theme="github-light"] .status-bar span,
+[data-theme="github-light"] .status-bar div {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+  color: #57606a !important;
+}
+
+[data-theme="github-light"] .editor-line-numbers {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+  color: #8c959f !important;
+}
+
+[data-theme="github-light"] .code-block-wrapper {
+  background: #f6f8fa !important;
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] .code-block-header {
+  background: #eaeef2 !important;
+  border-color: #d0d7de !important;
+  color: #57606a !important;
+}
+
+[data-theme="github-light"] pre[class*="language-"] {
+  background: #f6f8fa !important;
+  color: #24292f !important;
+}
+
+[data-theme="github-light"] .markdown-preview table th {
+  background: #f6f8fa !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .markdown-preview table td {
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] .markdown-preview blockquote {
+  background: #f6f8fa !important;
+  border-left-color: #0969da !important;
+  color: #57606a !important;
+}
+
+/* Markdown Preview Typography Styling */
+.markdown-preview {
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  font-size: 15px;
+  word-break: break-word;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  scroll-margin-top: 1.5rem;
+  position: relative;
+}
+
+.markdown-preview h1 {
+  font-size: 2.15rem;
+  line-height: 1.25;
+  padding-bottom: 0.6rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.markdown-preview h2 {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  padding-bottom: 0.4rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.markdown-preview h3 {
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.markdown-preview h4 {
+  font-size: 1.1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-preview p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-preview strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.markdown-preview a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  border-bottom: 1px dashed var(--accent);
+}
+
+.markdown-preview a:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.markdown-preview ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-preview ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-preview li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.markdown-preview li.task-list-item {
+  list-style-type: none;
+  margin-left: -1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.markdown-preview input[type="checkbox"] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 0.25rem;
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  position: relative;
+  top: 0.125rem;
+  transition: all 0.15s ease;
+}
+
+.markdown-preview input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.markdown-preview input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.markdown-preview blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--bg-secondary);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* GitHub Style Alerts / Callouts */
+.markdown-alert {
+  padding: 0.85rem 1.1rem;
+  margin: 1.25rem 0;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+  background: var(--bg-secondary);
+}
+
+.markdown-alert-note {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.markdown-alert-tip {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.markdown-alert-important {
+  border-color: #a855f7;
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.markdown-alert-warning {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.markdown-alert-caution {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.markdown-alert-note .markdown-alert-title { color: #38bdf8; }
+.markdown-alert-tip .markdown-alert-title { color: #22c55e; }
+.markdown-alert-important .markdown-alert-title { color: #a855f7; }
+.markdown-alert-warning .markdown-alert-title { color: #f59e0b; }
+.markdown-alert-caution .markdown-alert-title { color: #ef4444; }
+
+.markdown-alert-content {
+  color: var(--text-primary);
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+.markdown-alert-content p {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.markdown-alert-content p:first-child {
+  margin-top: 0;
+}
+
+.markdown-alert-content p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-content strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.markdown-alert-content a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Tables */
+.markdown-preview table {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  table-layout: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdown-preview th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 2px solid var(--border-color);
+  word-break: break-word;
+}
+
+.markdown-preview td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdown-preview tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-preview tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Inline Code */
+.markdown-preview :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.2em 0.45em;
+  border-radius: 0.35rem;
+  background: var(--bg-tertiary);
+  color: var(--accent);
+  border: 1px solid var(--border-subtle);
+  word-break: break-word;
+}
+
+/* Code Blocks & Highlight */
+.code-block-wrapper {
+  position: relative;
+  margin: 1.25rem 0;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  max-width: 100%;
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.code-block-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.code-block-copy-btn:hover {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+.markdown-preview pre {
+  margin: 0;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: transparent;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  overflow-x: hidden !important;
+}
+
+.markdown-preview pre code {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Mermaid Wrapper */
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 100px;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Target ONLY the main diagram SVG, not the action button or loading icon */
+.mermaid-wrapper > svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 75vh !important;
+  object-fit: contain !important;
+  display: block;
+}
+
+/* Mermaid Diagram Action Toolbar */
+.diagram-action-bar {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  display: flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.mermaid-wrapper:hover .diagram-action-bar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.diagram-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.75rem !important;
+  font-family: var(--font-sans) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(51, 65, 85, 0.8) !important;
+  border-radius: 0.375rem !important;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: auto !important;
+  height: auto !important;
+}
+
+.diagram-btn:hover {
+  background: #334155 !important;
+  color: #ffffff !important;
+  border-color: #64748b !important;
+}
+
+.diagram-btn-primary {
+  background: rgba(14, 165, 233, 0.2) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+}
+
+.diagram-btn-primary:hover {
+  background: #38bdf8 !important;
+  color: #090d16 !important;
+  border-color: #38bdf8 !important;
+}
+
+.diagram-btn svg {
+  width: 13px !important;
+  height: 13px !important;
+  max-width: 13px !important;
+  max-height: 13px !important;
+  flex-shrink: 0;
+  display: inline-block !important;
+}
+
+/* Light Theme Action Bar Overrides */
+[data-theme='github-light'] .diagram-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #334155 !important;
+  border: 1px solid #d0d7de !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='github-light'] .diagram-btn:hover {
+  background: #f3f4f6 !important;
+  color: #0969da !important;
+  border-color: #0969da !important;
+}
+
+[data-theme='github-light'] .diagram-btn-primary {
+  background: #0969da !important;
+  color: #ffffff !important;
+  border-color: #0969da !important;
+}
+
+[data-theme='github-light'] .diagram-btn-primary:hover {
+  background: #0854b3 !important;
+  color: #ffffff !important;
+}
+
+.mermaid-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.mermaid-loading svg {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+}
+
+.mermaid-error {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+/* Images & Media */
+.markdown-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem auto;
+  display: block;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Horizontal Rules */
+.markdown-preview hr {
+  border: none;
+  height: 1px;
+  background: var(--border-color);
+  margin: 2rem 0;
+}
+
+/* Keyboard badge */
+.kbd-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.3rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal & Popup Theme System Overrides */
+.app-modal-card {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.app-modal-header {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+.app-modal-input {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Theme specific popup & modal background fixes for light/dark themes */
+[data-theme="github-light"] .bg-slate-900,
+[data-theme="github-light"] .bg-slate-950,
+[data-theme="github-light"] .bg-slate-900\/90,
+[data-theme="github-light"] .bg-slate-900\/80,
+[data-theme="github-light"] .bg-slate-950\/90,
+[data-theme="github-light"] .bg-slate-950\/80,
+[data-theme="github-light"] .bg-slate-950\/60,
+[data-theme="github-light"] .bg-slate-950\/40,
+[data-theme="github-light"] .bg-slate-900\/60,
+[data-theme="github-light"] .bg-slate-900\/50,
+[data-theme="github-light"] .bg-slate-900\/40 {
+  background-color: #ffffff !important;
+  border-color: #d0d7de !important;
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .text-slate-100,
+[data-theme="github-light"] .text-slate-200,
+[data-theme="github-light"] .text-slate-300,
+[data-theme="github-light"] .text-white {
+  color: #1f2328 !important;
+}
+
+[data-theme="github-light"] .text-slate-400,
+[data-theme="github-light"] .text-slate-500 {
+  color: #656d76 !important;
+}
+
+[data-theme="github-light"] .border-slate-800,
+[data-theme="github-light"] .border-slate-700,
+[data-theme="github-light"] .border-slate-700\/80,
+[data-theme="github-light"] .border-slate-800\/80 {
+  border-color: #d0d7de !important;
+}
+
+[data-theme="github-light"] .hover\:bg-slate-800:hover,
+[data-theme="github-light"] .hover\:bg-slate-900:hover,
+[data-theme="github-light"] .hover\:bg-slate-800\/60:hover {
+  background-color: #eaeef2 !important;
+  color: #0969da !important;
+}
+
+/* Print CSS */
+@media print {
+  @page {
+    size: A4;
+    margin: 1.8cm 1.5cm;
+  }
+
+  html, body, app-root, main, .app-preview, .markdown-preview {
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    display: block !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  header, app-header, app-sidebar, app-toolbar, app-editor, app-status-bar,
+  app-command-palette, app-export-modal, app-cheatsheet-modal, .app-sidebar,
+  .app-editor, .app-toolbar, .status-bar, .no-print, [title*="resize"] {
+    display: none !important;
+  }
+  
+  .markdown-preview {
+    width: 100% !important;
+    max-width: 100% !important;
+    color: #111827 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .markdown-preview h1,
+  .markdown-preview h2,
+  .markdown-preview h3,
+  .markdown-preview h4 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    color: #111827 !important;
+  }
+
+  .markdown-preview strong {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+
+  /* Code blocks: soft line wrap, flow continuously across pages instead of forcing entire block to jump */
+  .code-block-wrapper,
+  .markdown-preview pre {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+  }
+
+  .markdown-preview pre code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Tables: flow across pages, repeat header, keep rows unbroken */
+  .markdown-preview table {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    width: 100% !important;
+    table-layout: auto !important;
+    word-break: break-word !important;
+  }
+
+  .markdown-preview thead {
+    display: table-header-group !important;
+  }
+
+  .markdown-preview tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  .markdown-alert,
+  img {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .mermaid-wrapper {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 0.8rem !important;
+  }
+
+  .mermaid-wrapper svg {
+    max-width: 100% !important;
+    max-height: 20cm !important;
+    height: auto !important;
+  }
+
+  .code-block-header, .heading-anchor, .code-block-copy-btn, .diagram-action-bar, .diagram-btn, .diagram-copy-svg-btn, .mermaid-loading, app-diagram-modal {
+    display: none !important;
+  }
+}
