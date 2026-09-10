@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "mdviewer",
+  "compatibility_date": "2026-09-10",
+  "assets": {
+    "directory": "./dist/mdviewer/browser"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
