@@ -3,7 +3,8 @@
   "name": "mdviewer",
   "compatibility_date": "2026-09-10",
   "assets": {
-    "directory": "./dist/mdviewer/browser"
+    "directory": "./dist/mdviewer/browser",
+    "not_found_handling": "single-page-application"
   },
   "observability": {
     "enabled": true
